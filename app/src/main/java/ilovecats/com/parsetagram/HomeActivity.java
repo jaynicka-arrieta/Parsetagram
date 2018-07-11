@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -35,11 +36,11 @@ public class HomeActivity extends AppCompatActivity {
     Button btnPost;
     Button btnRefresh;
     ImageView imageView;
+    File photoFile;
 
-    public final String APP_TAG = "MyCustomApp";
+    public final String APP_TAG = "Parsetagram";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
-    File photoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,17 @@ public class HomeActivity extends AppCompatActivity {
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String description = etDescription.getText().toString();
+                final ParseUser user = ParseUser.getCurrentUser();
+                final File file = getPhotoFileUri(photoFileName);
+                final ParseFile parseFile = new ParseFile(file);
+
+                parseFile.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        createPost(description, parseFile, user);
+                    }
+                });
 
             }
         });
@@ -87,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post [" + i +
+                        Log.d("HomeActivity", "Post[" + i +
                                 "] = " + objects.get(i).getDescription() +
                                 "\nusername = " + objects.get(i).getUser().getUsername());
                     }
