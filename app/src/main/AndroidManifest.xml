@@ -3,6 +3,8 @@
     package="ilovecats.com.parsetagram">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:name=".ParseApp"
@@ -23,6 +25,19 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <!-- make sure within the application tag, otherwise app will crash with XmlResourceParser errors -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="ilovecats.com.parsetagram"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider" />
+        </provider>
+
+
     </application>
 
 </manifest>
