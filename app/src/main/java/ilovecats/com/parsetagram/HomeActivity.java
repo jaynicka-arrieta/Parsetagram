@@ -1,6 +1,8 @@
 package ilovecats.com.parsetagram;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -48,7 +51,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-
         etDescription = findViewById(R.id.etDescription);
         btnCreate = findViewById(R.id.btnCreate);
         btnPost = findViewById(R.id.btnPost);
@@ -76,8 +78,8 @@ public class HomeActivity extends AppCompatActivity {
                         createPost(description, parseFile, user);
                     }
                 });
-
             }
+
         });
 
         btnRefresh.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +128,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     public void onLaunchCamera(View view) {
@@ -137,8 +140,14 @@ public class HomeActivity extends AppCompatActivity {
         // wrap File object into a content provider
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-        Uri fileProvider = FileProvider.getUriForFile(HomeActivity.this, "ilovecats.com.parsetagram", photoFile);
+
+        // getExternalFilesDir() + "/Pictures" should match the declaration in fileprovider.xml paths
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+
+        Uri fileProvider = FileProvider.getUriForFile(getApplicationContext(), "ilovecats.com.parsetagram", file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+
+
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
         // So as long as the result is not null, it's safe to use the intent.
@@ -164,5 +173,22 @@ public class HomeActivity extends AppCompatActivity {
 
         return file;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // by this point we have the camera photo on disk
+                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                // RESIZE BITMAP, see section below
+                // Load the taken image into a preview
+                ImageView ivPreview = (ImageView) findViewById(R.id.imageView);
+                ivPreview.setImageBitmap(takenImage);
+            } else { // Result was a failure
+                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
 }
