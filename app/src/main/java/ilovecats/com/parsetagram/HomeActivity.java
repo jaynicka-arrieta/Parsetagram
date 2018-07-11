@@ -29,6 +29,7 @@ import com.parse.SaveCallback;
 
 import java.io.File;
 import java.util.List;
+import java.util.Random;
 
 import ilovecats.com.parsetagram.model.Post;
 
@@ -40,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     Button btnRefresh;
     ImageView imageView;
     File photoFile;
+    //String photoFileName;
 
     public final String APP_TAG = "Parsetagram";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -56,6 +58,8 @@ public class HomeActivity extends AppCompatActivity {
         btnPost = findViewById(R.id.btnPost);
         btnRefresh = findViewById(R.id.btnRefresh);
         imageView = findViewById(R.id.imageView);
+        //photoFileName = randomStringGenerator();
+        //photoFileName.concat(".jpg");
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i +
+                        Log.d("HomeActivity", "Post[" + i+1 +
                                 "] = " + objects.get(i).getDescription() +
                                 "\nusername = " + objects.get(i).getUser().getUsername());
                     }
@@ -140,14 +144,8 @@ public class HomeActivity extends AppCompatActivity {
         // wrap File object into a content provider
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-
-        // getExternalFilesDir() + "/Pictures" should match the declaration in fileprovider.xml paths
-        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
-
-        Uri fileProvider = FileProvider.getUriForFile(getApplicationContext(), "ilovecats.com.parsetagram", file);
+        Uri fileProvider = FileProvider.getUriForFile(getApplicationContext(), "ilovecats.com.parsetagram", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-
-
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
         // So as long as the result is not null, it's safe to use the intent.
@@ -188,6 +186,21 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public String randomStringGenerator() {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        String generatedString = buffer.toString();
+        return generatedString;
     }
 
 
