@@ -50,6 +50,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="91dp"
-        app:srcCompat="@android:color/black" />
+        app:srcCompat="@android:color/transparent" />
 
 </RelativeLayout>

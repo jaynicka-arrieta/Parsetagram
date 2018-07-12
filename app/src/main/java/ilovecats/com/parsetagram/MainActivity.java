@@ -8,16 +8,21 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText etEmail;
+    private EditText etHandle;
     private EditText etUsername;
     private EditText etPassword;
     private Button btLogin;
+    private Button btSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +30,46 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etEmail.setVisibility(View.INVISIBLE);
+        etHandle = (EditText) findViewById(R.id.etHandle);
+        etHandle.setVisibility(View.INVISIBLE);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btLogin = (Button) findViewById(R.id.btLogin);
+        btSignUp = (Button) findViewById(R.id.btnSignUp);
+
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final String username = etUsername.getText().toString();
                 final String password = etPassword.getText().toString();
-
                 login(username, password);
+
+            }
+        });
+
+        btSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etEmail.setVisibility(View.VISIBLE);
+                etHandle.setVisibility(View.VISIBLE);
+                btSignUp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final String username = etUsername.getText().toString();
+                        final String password = etPassword.getText().toString();
+                        final String email = etEmail.getText().toString();
+                        final String handle = etHandle.getText().toString();
+
+                        if (username.equals("") || password.equals("") || email.equals("") || handle.equals("")) {
+                            Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+                        } else {
+                            signUp(username, password, email, handle);
+                        }
+                    }
+                });
             }
         });
     }
@@ -47,12 +81,39 @@ public class MainActivity extends AppCompatActivity {
                 if (e == null) {
                     Log.d("MainActivity", "Login succecssful");
                     final Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
                     startActivity(i);
                     finish();
                 } else {
                     Log.e("MainActivity", "Login failure");
+                    Toast.makeText(getApplicationContext(), "Login Failure", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
+            }
+        });
+    }
+
+    private void signUp(String username, String password, String email, String handle) {
+        ParseUser user = new ParseUser();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.put("handle", handle);
+
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("MainActivity", "Sign up succecssful");
+                    final Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                    Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
+                    startActivity(i);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Username taken", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
             }
         });
     }
