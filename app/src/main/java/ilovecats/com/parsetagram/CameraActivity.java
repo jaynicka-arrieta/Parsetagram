@@ -34,6 +34,9 @@ public class CameraActivity extends AppCompatActivity {
     Button btnCreate;
     Button btnPost;
     Button btnRefresh;
+    ImageView ivHomeButton;
+    ImageView ivAddPost;
+    ImageView ivProfile;
     ImageView imageView;
     File photoFile;
     //String photoFileName;
@@ -53,6 +56,9 @@ public class CameraActivity extends AppCompatActivity {
         btnPost = findViewById(R.id.btnPost);
         btnRefresh = findViewById(R.id.btnRefresh);
         imageView = findViewById(R.id.imageView);
+        ivHomeButton = findViewById(R.id.ivHomeButton);
+        ivAddPost = findViewById(R.id.ivAddPost);
+        ivProfile = findViewById(R.id.ivProfile);
         //photoFileName = randomStringGenerator();
         //photoFileName.concat(".jpg");
 
@@ -88,11 +94,19 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
+        ivHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
-    private void loadTopPosts() {
+    public void loadTopPosts() {
         final Post.Query postQuery = new Post.Query();
-        postQuery .getTop().withUser();
+        postQuery.getTop().withUser();
 
 
         postQuery.findInBackground(new FindCallback<Post>() {
@@ -181,21 +195,6 @@ public class CameraActivity extends AppCompatActivity {
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    public String randomStringGenerator() {
-        int leftLimit = 97; // letter 'a'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
-        Random random = new Random();
-        StringBuilder buffer = new StringBuilder(targetStringLength);
-        for (int i = 0; i < targetStringLength; i++) {
-            int randomLimitedInt = leftLimit + (int)
-                    (random.nextFloat() * (rightLimit - leftLimit + 1));
-            buffer.append((char) randomLimitedInt);
-        }
-        String generatedString = buffer.toString();
-        return generatedString;
     }
 
 

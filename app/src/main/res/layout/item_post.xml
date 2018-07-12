@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@android:color/black"
-        android:layout_margin="5dp"/>
+    android:layout_width="match_parent"
+    android:layout_height="475dp">
 
     <TextView
         android:id="@+id/tvHandle"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/profile_image"
-        android:text="handle"
         android:layout_margin="5dp"
-        android:gravity="center"/>
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:text="handle"
+        android:textSize="15sp" />
 
     <ImageView
         android:id="@+id/ivImagePost"
@@ -37,8 +30,8 @@
         android:layout_height="20dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ivImagePost"
-        app:srcCompat="@drawable/ufi_heart_icon"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        app:srcCompat="@drawable/ufi_heart_icon" />
 
     <ImageView
         android:id="@+id/ivComment"
@@ -50,21 +43,12 @@
         app:srcCompat="@drawable/ufi_comment" />
 
     <ImageView
-        android:id="@+id/ivSend"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_below="@+id/ivImagePost"
-        android:layout_marginTop="4dp"
-        android:layout_toEndOf="@+id/profile_image"
-        app:srcCompat="@drawable/ufi_new_direct" />
-
-    <ImageView
         android:id="@+id/ivSave"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_margin="5dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/ivImagePost"
+        android:layout_margin="5dp"
         app:srcCompat="@drawable/ufi_save_icon" />
 
     <TextView
@@ -73,7 +57,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="68dp"
-        android:text="Description" />
+        android:layout_marginBottom="33dp"
+        android:text="Description"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/ivSend"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/ivLikeIcon"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/ivComment"
+        app:srcCompat="@drawable/direct" />
 
 </RelativeLayout>
