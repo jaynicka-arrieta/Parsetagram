@@ -33,7 +33,7 @@ import java.util.Random;
 
 import ilovecats.com.parsetagram.model.Post;
 
-public class HomeActivity extends AppCompatActivity {
+public class CameraActivity extends AppCompatActivity {
 
     EditText etDescription;
     Button btnCreate;
@@ -105,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i+1 +
+                        Log.d("CameraActivity", "Post[" + i+1 +
                                 "] = " + objects.get(i).getDescription() +
                                 "\nusername = " + objects.get(i).getUser().getUsername());
                     }
@@ -126,7 +126,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    Log.d("HomeActivity", "Post successfully created");
+                    Log.d("CameraActivity", "Post successfully created");
                 } else {
                     e.printStackTrace();
                 }

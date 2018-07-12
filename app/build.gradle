@@ -10,6 +10,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    ext {
+        supportLibVersion = '27.1.1'  // variable that can be referenced to keep support libs consistent
+    }
     buildTypes {
         release {
             minifyEnabled false

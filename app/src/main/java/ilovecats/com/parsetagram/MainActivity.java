@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
         etUsername = (EditText) findViewById(R.id.etUsername);
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if (e == null) {
                     Log.d("MainActivity", "Login succecssful");
-                    final Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    final Intent i = new Intent(getApplicationContext(), CameraActivity.class);
                     startActivity(i);
                     finish();
                 } else {
