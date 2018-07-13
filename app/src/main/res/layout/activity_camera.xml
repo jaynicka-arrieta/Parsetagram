@@ -17,7 +17,8 @@
         android:ems="10"
         android:gravity="top|left"
         android:hint="Description"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName|textMultiLine"
+        android:scrollHorizontally="false"/>
 
     <Button
         android:id="@+id/btnCreate"

@@ -2,6 +2,7 @@ package ilovecats.com.parsetagram;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -51,10 +52,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         //populate the views according to data
         holder.tvHandle.setText(post.getUser().getUsername().toString());
+        holder.tvHandle.setTextColor(Color.BLACK);
         holder.tvDescription.setTypeface(null, Typeface.BOLD);
-        holder.tvDescription.setText(post.getUser().getUsername().toString() + " ");
+        holder.tvDescription.setText(post.getUser().getUsername().toString() + " - ");
         holder.tvDescription.setTypeface(null, Typeface.NORMAL);
         holder.tvDescription.append(post.getDescription().toString());
+        holder.tvDescription.setTextColor(Color.BLACK);
 
 
 

@@ -1,5 +1,6 @@
 package ilovecats.com.parsetagram;
 
+import android.app.Activity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +32,20 @@ public class TimelineActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_timeline);
 
-        rvPosts = (RecyclerView) findViewById(R.id.rvPost);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchTimelineAsync(0);
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        rvPosts = (RecyclerView) findViewById(R.id.rvPosts);
         posts = new ArrayList<>();
         postAdapter = new PostAdapter(posts);
 
@@ -68,5 +82,13 @@ public class TimelineActivity extends AppCompatActivity {
         });
 
     }
+
+    public void fetchTimelineAsync(int page) {
+        // Send the network request to fetch the updated data
+        postAdapter.clear();
+        populateTimeline();
+        swipeContainer.setRefreshing(false);
+    }
+
 
 }

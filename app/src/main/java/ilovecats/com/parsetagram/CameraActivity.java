@@ -24,7 +24,6 @@ import com.parse.SaveCallback;
 
 import java.io.File;
 import java.util.List;
-import java.util.Random;
 
 import ilovecats.com.parsetagram.model.Post;
 
@@ -59,8 +58,8 @@ public class CameraActivity extends AppCompatActivity {
         ivHomeButton = findViewById(R.id.ivHomeButton);
         ivAddPost = findViewById(R.id.ivAddPost);
         ivProfile = findViewById(R.id.ivProfile);
-        //photoFileName = randomStringGenerator();
-        //photoFileName.concat(".jpg");
+
+        btnRefresh.setVisibility(View.INVISIBLE);
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,24 +80,37 @@ public class CameraActivity extends AppCompatActivity {
                     @Override
                     public void done(ParseException e) {
                         createPost(description, parseFile, user);
+                        loadTopPosts();
+                        final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
+                        startActivity(i);
+                        finish();
                     }
                 });
             }
 
         });
 
-        btnRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadTopPosts();
-            }
-        });
+//        btnRefresh.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                loadTopPosts();
+//            }
+//        });
 
         ivHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
                 startActivity(i);
+            }
+        });
+
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 

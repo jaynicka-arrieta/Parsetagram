@@ -72,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            final Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+            Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+            startActivity(i);
+            finish();
+        }
     }
 
     private void login(String username, String password) {
