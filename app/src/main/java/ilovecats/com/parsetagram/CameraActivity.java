@@ -53,13 +53,11 @@ public class CameraActivity extends AppCompatActivity {
         etDescription = findViewById(R.id.etDescription);
         btnCreate = findViewById(R.id.btnCreate);
         btnPost = findViewById(R.id.btnPost);
-        btnRefresh = findViewById(R.id.btnRefresh);
         imageView = findViewById(R.id.imageView);
         ivHomeButton = findViewById(R.id.ivHomeButton);
         ivAddPost = findViewById(R.id.ivAddPost);
         ivProfile = findViewById(R.id.ivProfile);
 
-        btnRefresh.setVisibility(View.INVISIBLE);
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +88,6 @@ public class CameraActivity extends AppCompatActivity {
 
         });
 
-//        btnRefresh.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                loadTopPosts();
-//            }
-//        });
 
         ivHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override

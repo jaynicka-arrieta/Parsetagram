@@ -53,11 +53,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //populate the views according to data
         holder.tvHandle.setText(post.getUser().getUsername().toString());
         holder.tvHandle.setTextColor(Color.BLACK);
+
         holder.tvDescription.setTypeface(null, Typeface.BOLD);
         holder.tvDescription.setText(post.getUser().getUsername().toString() + " - ");
         holder.tvDescription.setTypeface(null, Typeface.NORMAL);
         holder.tvDescription.append(post.getDescription().toString());
         holder.tvDescription.setTextColor(Color.BLACK);
+
+        String timestamp = post.getCreatedAt().toString().substring(4, 11);
+        holder.tvTimeStamp.setText(timestamp);
 
 
 
@@ -71,12 +75,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public ImageView ivImagePost;
         public TextView tvDescription;
         public TextView tvHandle;
+        public TextView tvTimeStamp;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivImagePost = (ImageView) itemView.findViewById(R.id.ivImagePost);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
             tvHandle = (TextView) itemView.findViewById(R.id.tvHandle);
+            tvTimeStamp = (TextView) itemView.findViewById(R.id.tvTimeStamp);
+
+            ivImagePost.setOnClickListener(this);
+
         }
 
         @Override
@@ -84,8 +93,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Post post = mPosts.get(position);
-                Intent i = new Intent(context, TimelineActivity.class);
-                i.putExtra("data", Parcels.wrap(post));
+                Intent i = new Intent(context, DetailActivity.class);
+                i.putExtra("post", Parcels.wrap(post));
                 context.startActivity(i);
             }
         }
