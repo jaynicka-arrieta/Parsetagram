@@ -1,13 +1,19 @@
 package ilovecats.com.parsetagram;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
@@ -33,6 +39,7 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_timeline);
+        bottomNav();
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -90,6 +97,33 @@ public class TimelineActivity extends AppCompatActivity {
         postAdapter.clear();
         populateTimeline();
         swipeContainer.setRefreshing(false);
+    }
+
+    public void bottomNav() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.action_post:
+                        final Intent e = new Intent(getApplicationContext(), CameraActivity.class);
+                        startActivity(e);
+                        finish();
+                        return true;
+                    case R.id.action_user:
+                        final Intent f = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(f);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
 

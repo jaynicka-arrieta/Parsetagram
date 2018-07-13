@@ -7,9 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,13 +36,9 @@ public class CameraActivity extends AppCompatActivity {
     Button btnCreate;
     Button btnPost;
     Button btnRefresh;
-    ImageView ivHomeButton;
-    ImageView ivAddPost;
-    ImageView ivProfile;
     ImageView imageView;
     File photoFile;
-    //String photoFileName;
-
+    BottomNavigationView bottomNavigationView;
     public final String APP_TAG = "Parsetagram";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
@@ -49,14 +48,13 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNav();
 
         etDescription = findViewById(R.id.etDescription);
         btnCreate = findViewById(R.id.btnCreate);
         btnPost = findViewById(R.id.btnPost);
         imageView = findViewById(R.id.imageView);
-        ivHomeButton = findViewById(R.id.ivHomeButton);
-        ivAddPost = findViewById(R.id.ivAddPost);
-        ivProfile = findViewById(R.id.ivProfile);
 
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -88,24 +86,32 @@ public class CameraActivity extends AppCompatActivity {
 
         });
 
+    }
 
-        ivHomeButton.setOnClickListener(new View.OnClickListener() {
+    public void bottomNav() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
-                startActivity(i);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
+                        startActivity(i);
+                        finish();
+                        return true;
+                    case R.id.action_post:
+                        final Intent e = new Intent(getApplicationContext(), CameraActivity.class);
+                        startActivity(e);
+                        finish();
+                        return true;
+                    case R.id.action_user:
+                        final Intent f = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(f);
+                        finish();
+                        return true;
+                }
+                return false;
             }
         });
-
-        ivProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-
     }
 
     public void loadTopPosts() {
@@ -200,6 +206,5 @@ public class CameraActivity extends AppCompatActivity {
             }
         }
     }
-
 
 }
