@@ -2,7 +2,7 @@
 
 **Parsetagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **X** hours spent in total
+Time spent: **27** hours spent in total
 
 ## User Stories
 
@@ -40,14 +40,14 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Using fragments with the bottom navigation view.
+2. Accessing custom columns from parse.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/aIy7KO1.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -60,7 +60,7 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+My biggest struggle was figuring out how to access the camera from the app. Somya definitely helped me out with it, and I'm forever grateful for it.
 
 ## License
 
