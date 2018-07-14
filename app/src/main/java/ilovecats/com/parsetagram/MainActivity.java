@@ -47,20 +47,14 @@ public class MainActivity extends AppCompatActivity {
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String username = etUsername.getText().toString();
+                final String password = etPassword.getText().toString();
 
-                btSignUp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        final String username = etUsername.getText().toString();
-                        final String password = etPassword.getText().toString();
-
-                        if (username.equals("") || password.equals("")) {
-                            Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
-                        } else {
-                            signUp(username, password);
-                        }
-                    }
-                });
+                if (username.equals("") || password.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    signUp(username, password);
+                }
             }
         });
 

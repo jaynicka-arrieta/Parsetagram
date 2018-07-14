@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -35,7 +36,6 @@ public class CameraActivity extends AppCompatActivity {
     EditText etDescription;
     Button btnCreate;
     Button btnPost;
-    Button btnRefresh;
     ImageView imageView;
     File photoFile;
     BottomNavigationView bottomNavigationView;
@@ -55,7 +55,6 @@ public class CameraActivity extends AppCompatActivity {
         btnCreate = findViewById(R.id.btnCreate);
         btnPost = findViewById(R.id.btnPost);
         imageView = findViewById(R.id.imageView);
-
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
