@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvHandle"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="17dp"
+        android:gravity="center"
+        android:text="handle"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/ivImagePost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="66dp"
+        android:layout_above="@id/ivLikeIcon"
+        app:srcCompat="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/ivLikeIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="5dp"
+        android:layout_above="@+id/tvDescription"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/ufi_heart_icon" />
+
+    <ImageView
+        android:id="@+id/ivComment"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="5dp"
+
+        android:layout_below="@+id/ivImagePost"
+        android:layout_toEndOf="@+id/ivLikeIcon"
+        app:srcCompat="@drawable/ufi_comment" />
+
+    <ImageView
+        android:id="@+id/ivSave"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ivImagePost"
+        app:srcCompat="@drawable/ufi_save_icon" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvTimeStamp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Description"
+        android:textSize="17sp" />
+
+    <ImageView
+        android:id="@+id/ivSend"
+        android:layout_width="24dp"
+        android:layout_height="25dp"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/ivImagePost"
+        android:layout_toEndOf="@+id/ivComment"
+        app:srcCompat="@drawable/direct" />
+
+    <TextView
+        android:id="@+id/tvTimeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentStart="true"
+        android:text="Timestamp" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/navigation" />
+
+
+</RelativeLayout>

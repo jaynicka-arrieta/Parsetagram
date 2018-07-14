@@ -2,6 +2,7 @@ package ilovecats.com.parsetagram;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -29,6 +30,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeContainer;
     Post.Query postQuery;
+
 
     PostAdapter postAdapter;
     ArrayList<Post> posts;

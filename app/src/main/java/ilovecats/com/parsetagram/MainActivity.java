@@ -17,8 +17,6 @@ import com.parse.SignUpCallback;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etEmail;
-    private EditText etHandle;
     private EditText etUsername;
     private EditText etPassword;
     private Button btLogin;
@@ -30,10 +28,6 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etEmail.setVisibility(View.INVISIBLE);
-        etHandle = (EditText) findViewById(R.id.etHandle);
-        etHandle.setVisibility(View.INVISIBLE);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btLogin = (Button) findViewById(R.id.btLogin);
@@ -53,20 +47,17 @@ public class MainActivity extends AppCompatActivity {
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etEmail.setVisibility(View.VISIBLE);
-                etHandle.setVisibility(View.VISIBLE);
+
                 btSignUp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         final String username = etUsername.getText().toString();
                         final String password = etPassword.getText().toString();
-                        final String email = etEmail.getText().toString();
-                        final String handle = etHandle.getText().toString();
 
-                        if (username.equals("") || password.equals("") || email.equals("") || handle.equals("")) {
+                        if (username.equals("") || password.equals("")) {
                             Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
                         } else {
-                            signUp(username, password, email, handle);
+                            signUp(username, password);
                         }
                     }
                 });
@@ -75,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
-            final Intent i = new Intent(getApplicationContext(), CameraActivity.class);
-            Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+            final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
             startActivity(i);
             finish();
         }
@@ -101,12 +91,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void signUp(String username, String password, String email, String handle) {
+    private void signUp(String username, String password) {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
-        user.setEmail(email);
-        user.put("handle", handle);
 
         user.signUpInBackground(new SignUpCallback() {
             @Override
