@@ -78,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if (e == null) {
                     Log.d("MainActivity", "Login succecssful");
-                    final Intent i = new Intent(getApplicationContext(), CameraActivity.class);
-                    Toast.makeText(getApplicationContext(), "Successful", Toast.LENGTH_SHORT).show();
+                    final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
                     startActivity(i);
                     finish();
                 } else {
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     Log.d("MainActivity", "Sign up succecssful");
-                    final Intent i = new Intent(getApplicationContext(), CameraActivity.class);
+                    final Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
                     Toast.makeText(getApplicationContext(), "Welcome!", Toast.LENGTH_SHORT).show();
                     startActivity(i);
                     finish();
